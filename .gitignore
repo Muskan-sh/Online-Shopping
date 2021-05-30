@@ -1,0 +1,4 @@
+/src/main/resources/hibernate.cfg.xml
+/.idea
+/e_commerce_project.iml
+/target
