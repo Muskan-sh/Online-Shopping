@@ -4,9 +4,12 @@ import com.example.myProject.FactoryProvider;
 import com.example.myProject.dao.UserDao;
 import com.example.myProject.entities.User;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -34,12 +37,8 @@ public class LoginServlet extends HttpServlet {
             }else{
                 //login approved
                 httpSession.setAttribute("current-user",user);
-                if (user.getUserType().equals("admin")){
+                if (user.getUserType().equals("admin") || user.getUserType().equals("normal")){
                     // admin page
-                    response.sendRedirect("index.jsp");
-                }
-                else if(user.getUserType().equals("normal")){
-                    // normal user page
                     response.sendRedirect("index.jsp");
                 }
                 else {

@@ -1,4 +1,6 @@
 <%@ page import="com.example.myProject.entities.User" %>
+<%@ page import="com.example.myProject.dao.CartDao" %>
+<%@ page import="com.example.myProject.FactoryProvider" %>
 <%
     User user1= (User) session.getAttribute("current-user");
 %>
@@ -36,8 +38,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#!" data-toggle="modal" data-target="#cartModal" ><i class="fas fa-shopping-cart mr-1 " style="font-size: 20px;" ></i><span class="cart-items">
-                    <%@include file="cart.jsp" %>
+                    <a class="nav-link" href="cart.jsp" ><i class="fas fa-shopping-cart mr-1 " style="font-size: 20px;" ></i><span class="cart-items">
 
                     <%
                         if(user1==null){
@@ -45,8 +46,9 @@
                             (0)
                     <%
                         }else{
+                            CartDao cdao= new CartDao(FactoryProvider.getFactory());
                     %>
-                            (4)
+                            (<%= cdao.getCartItemsByUserId(user1.getUserID()).size()%>)
                     <%
                             }
                     %>

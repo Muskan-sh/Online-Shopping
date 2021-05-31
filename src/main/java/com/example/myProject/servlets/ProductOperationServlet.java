@@ -6,11 +6,14 @@ import com.example.myProject.dao.ProductDao;
 import com.example.myProject.entities.Category;
 import com.example.myProject.entities.Product;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.io.*;
-import java.util.Arrays;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 
 @MultipartConfig
 @WebServlet(name = "ProductOperationServlet", value = "/ProductOperationServlet")

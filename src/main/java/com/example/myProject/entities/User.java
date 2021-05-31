@@ -1,6 +1,8 @@
 package com.example.myProject.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -19,6 +21,14 @@ public class User {
     private String userAddress;
 
     private String userType;
+
+
+//    @ManyToMany(mappedBy = "user")
+////    @JoinTable(
+////            name = "Cart",
+////            joinColumns = @JoinColumn(name = "userId"),
+////            inverseJoinColumns = @JoinColumn(name = "pId"))
+//    private List<Product> products = new ArrayList<>();
 
     public User(int userID, String userName, String userEmail, String userPassword,
                 String userPhone, String userPic, String userAddress, String userType) {
@@ -110,6 +120,14 @@ public class User {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+
+//    public List<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(List<Product> products) {
+//        this.products = products;
+//    }
 
     @Override
     public String toString() {

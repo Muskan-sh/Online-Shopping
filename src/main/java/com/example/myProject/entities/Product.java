@@ -1,6 +1,8 @@
 package com.example.myProject.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -16,6 +18,9 @@ public class Product {
     private int pQuantity;
     @ManyToOne
     private Category category;
+
+//    @ManyToMany
+//    private List<User> users = new ArrayList<>();
 
     public Product() {
     }
@@ -94,6 +99,14 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     @Override
     public String toString() {

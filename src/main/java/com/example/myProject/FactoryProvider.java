@@ -13,8 +13,8 @@ public class FactoryProvider {
                         .configure("hibernate.cfg.xml");
                 factory = config.buildSessionFactory();
                 }
-        } catch (Throwable ex){
-            throw new ExceptionInInitializerError(ex);
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return factory;
     }

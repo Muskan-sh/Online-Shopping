@@ -26,6 +26,20 @@ public class ProductDao {
         return pId;
     }
 
+    public Product getProductById(int pId){
+
+        Product product=null;
+        try{
+            Session session= this.factory.openSession();
+            product=session.get(Product.class,pId);
+            session.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return product;
+    }
+
     public void updateProductPhoto(Product product,String pPhoto){
         Session session= factory.openSession();
         Transaction tx= session.beginTransaction();

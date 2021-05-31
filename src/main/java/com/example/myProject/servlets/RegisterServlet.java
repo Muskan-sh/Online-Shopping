@@ -3,12 +3,13 @@ package com.example.myProject.servlets;
 import com.example.myProject.FactoryProvider;
 import com.example.myProject.dao.UserDao;
 import com.example.myProject.entities.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -31,8 +32,15 @@ public class RegisterServlet extends HttpServlet {
 
                 // Validations...
                 // creating User object
+                String userType = "";
+                if (userEmail.equals("muskansm@gmail.com")){
+                    userType="admin";
+                }
+                else{
+                    userType="normal";
+                }
                 User user = new User(userName,userEmail,userPassword,userPhone,
-                        "default.jpg",userAddress,"normal");
+                        "default.jpg",userAddress,userType);
 
                 UserDao userDao=new UserDao(FactoryProvider.getFactory());
                 int userId=userDao.saveUser(user);

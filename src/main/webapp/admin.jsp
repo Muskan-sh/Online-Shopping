@@ -32,12 +32,12 @@
         /*    background: #CFD8DC;*/
         /*}*/
         .card {
-            background: pink;
-            border: 1px solid crimson;
+            background: pink !important;
+            border: 1px solid crimson !important;
         }
         .card:hover{
-            background: lightgrey;
-            cursor: pointer;
+            background: lightgrey !important;
+            cursor: pointer !important;
         }
     </style>
 
