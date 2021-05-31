@@ -104,6 +104,8 @@
                             <div class="container text-center">
                                 <img src="product_images/<%=p.getpPhoto() %>" style="max-height: 250px; max-width: 95%; width: auto; " class="card-img-top m-2" alt="Product image">
                             </div>
+
+
                             <div class="card-body">
                                 <h4 class="card-title"><%=p.getpName()%> </h4>
                                 <p class="card-text">

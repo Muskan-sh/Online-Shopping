@@ -85,12 +85,28 @@ public class ProductOperationServlet extends HttpServlet {
 //                productDao.updateProductPhoto(product, category.getCategoryTitle().replace(' ','-') + "-" + pId +photo.substring(photo.indexOf('.')));
 
                 //uploading pic
-                String path= "C:\\Users\\reach\\Desktop\\product_images\\"+product.getpPhoto();
-                System.out.println(path);
+                String path1= "C:\\Users\\reach\\Desktop\\demo\\target\\e_commerce_project-1.0-SNAPSHOT\\product_images\\"+product.getpPhoto();
+                String path2= "C:\\Users\\reach\\Desktop\\demo\\src\\main\\webapp\\product_images\\"+product.getpPhoto();
+//                System.out.println(path1);
 
                 try {
 
-                    FileOutputStream fos = new FileOutputStream(path);
+                    FileOutputStream fos = new FileOutputStream(path1);
+                    InputStream is = part.getInputStream();
+
+                    // reading data
+                    byte[] data = new byte[is.available()];
+                    is.read(data);
+
+                    // writing data
+                    fos.write(data);
+                    fos.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+
+                    FileOutputStream fos = new FileOutputStream(path2);
                     InputStream is = part.getInputStream();
 
                     // reading data
