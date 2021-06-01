@@ -21,7 +21,7 @@ public class ProductOperationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     @Override
@@ -29,30 +29,30 @@ public class ProductOperationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out =response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
 
-            String op =request.getParameter("operation");
+            String op = request.getParameter("operation");
 
-            if(op.trim().equals("addcategory")){
+            if (op.trim().equals("addcategory")) {
 
                 // Adding category
                 String title = request.getParameter("catTitle");
                 String description = request.getParameter("catDescription");
 
-                Category category=new Category();
+                Category category = new Category();
                 category.setCategoryTitle(title);
                 category.setCategoryDescription(description);
 
-                CategoryDao categoryDao=new CategoryDao(FactoryProvider.getFactory());
-                int catId= categoryDao.saveCategory(category);
+                CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
+                int catId = categoryDao.saveCategory(category);
 
-                HttpSession httpSession= request.getSession();
-                httpSession.setAttribute("message","Category added successfully!!<br>" +
-                        "Category Id is : "+catId);
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("message", "Category added successfully!!<br>" +
+                        "Category Id is : " + catId);
                 response.sendRedirect("admin.jsp");
                 return;
 
-            }else if(op.trim().equals("addproduct")){
+            } else if (op.trim().equals("addproduct")) {
 
                 // adding product
                 String name = request.getParameter("pName");
@@ -61,10 +61,10 @@ public class ProductOperationServlet extends HttpServlet {
                 int discount = Integer.parseInt(request.getParameter("pDiscount"));
                 int quantity = Integer.parseInt(request.getParameter("pQuantity"));
                 int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                Part part=request.getPart("pPhoto");
-                String photo=part.getSubmittedFileName();
+                Part part = request.getPart("pPhoto");
+                String photo = part.getSubmittedFileName();
 
-                Product product=new Product();
+                Product product = new Product();
                 product.setpName(name);
                 product.setpDescription(description);
                 product.setpPrice(price);
@@ -73,20 +73,20 @@ public class ProductOperationServlet extends HttpServlet {
                 product.setpPhoto(photo);
 
                 // Category by ID..
-                CategoryDao categoryDao=new CategoryDao(FactoryProvider.getFactory());
-                Category category=categoryDao.getCategoryById(categoryId);
+                CategoryDao categoryDao = new CategoryDao(FactoryProvider.getFactory());
+                Category category = categoryDao.getCategoryById(categoryId);
                 product.setCategory(category);
 
                 // product saved..
 
-                ProductDao productDao=new ProductDao(FactoryProvider.getFactory());
+                ProductDao productDao = new ProductDao(FactoryProvider.getFactory());
                 int pId = productDao.saveProduct(product);
 
 //                productDao.updateProductPhoto(product, category.getCategoryTitle().replace(' ','-') + "-" + pId +photo.substring(photo.indexOf('.')));
 
                 //uploading pic
-                String path1= "C:\\Users\\reach\\Desktop\\demo\\target\\e_commerce_project-1.0-SNAPSHOT\\product_images\\"+product.getpPhoto();
-                String path2= "C:\\Users\\reach\\Desktop\\demo\\src\\main\\webapp\\product_images\\"+product.getpPhoto();
+                String path1 = "C:\\Users\\reach\\Desktop\\demo\\target\\e_commerce_project-1.0-SNAPSHOT\\product_images\\" + product.getpPhoto();
+                String path2 = "C:\\Users\\reach\\Desktop\\demo\\src\\main\\webapp\\product_images\\" + product.getpPhoto();
 //                System.out.println(path1);
 
                 try {
@@ -101,7 +101,7 @@ public class ProductOperationServlet extends HttpServlet {
                     // writing data
                     fos.write(data);
                     fos.close();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 try {
@@ -116,14 +116,14 @@ public class ProductOperationServlet extends HttpServlet {
                     // writing data
                     fos.write(data);
                     fos.close();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
-                HttpSession httpSession= request.getSession();
-                httpSession.setAttribute("message","Product added successfully!!<br>" +
-                        "Product Id is : "+pId);
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("message", "Product added successfully!!<br>" +
+                        "Product Id is : " + pId);
                 response.sendRedirect("admin.jsp");
                 return;
 

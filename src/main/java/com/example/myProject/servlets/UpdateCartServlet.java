@@ -7,9 +7,12 @@ import com.example.myProject.entities.Cart;
 import com.example.myProject.entities.Product;
 import com.example.myProject.entities.User;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,31 +27,30 @@ public class UpdateCartServlet extends HttpServlet {
 
             HttpSession httpSession = request.getSession();
 
-            String op= request.getParameter("operation");
+            String op = request.getParameter("operation");
             Cart cartItem = ((List<Cart>) httpSession.getAttribute("cart_List")).get(Integer.parseInt(request.getParameter("cart_item")));
 
-            int pid=Integer.parseInt(request.getParameter("object_name"));
-            int uid= ((User)httpSession.getAttribute("current-user")).getUserID();
+            int pid = Integer.parseInt(request.getParameter("object_name"));
+            int uid = ((User) httpSession.getAttribute("current-user")).getUserID();
 
             System.out.println(op);
 
             ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
             Product p = pdao.getProductById(pid);
 
-            CartDao cdao= new CartDao(FactoryProvider.getFactory());
+            CartDao cdao = new CartDao(FactoryProvider.getFactory());
 
 
-            if(op.trim().equals("decrease")){
-                if(cartItem.getAmount()==1){
+            if (op.trim().equals("decrease")) {
+                if (cartItem.getAmount() == 1) {
                     httpSession.setAttribute("message", "Minimum product quantity is 1  !!");
                     response.sendRedirect("cart.jsp");
-                }else {
+                } else {
                     cdao.decreaseAmountBy1(cartItem);
                     response.sendRedirect("cart.jsp");
                 }
 
-            }
-            else if(op.trim().equals("increase")){
+            } else if (op.trim().equals("increase")) {
                 if (cartItem.getAmount() == p.getpQuantity()) {
                     httpSession.setAttribute("message", "Product quantity can't be increased due to stock limits!!");
                     response.sendRedirect("cart.jsp");
@@ -56,16 +58,14 @@ public class UpdateCartServlet extends HttpServlet {
                     cdao.increseAmountBy1(cartItem);
                     response.sendRedirect("cart.jsp");
                 }
-            }
-            else if(op.trim().equals("remove")){
-                cdao.removeItem(pid,uid);
+            } else if (op.trim().equals("remove")) {
+                cdao.removeItem(pid, uid);
                 httpSession.setAttribute("message", "Product Removed from cart!!");
                 response.sendRedirect("cart.jsp");
             }
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

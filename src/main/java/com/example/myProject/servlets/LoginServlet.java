@@ -20,39 +20,38 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out =response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
 
             String userEmail = request.getParameter("user_email");
             String userPassword = request.getParameter("user_password");
             // Validations
             // Authentication
             UserDao userDao = new UserDao(FactoryProvider.getFactory());
-            User user = userDao.getUserByEmailAndPassword(userEmail,userPassword);
+            User user = userDao.getUserByEmailAndPassword(userEmail, userPassword);
 
-            HttpSession httpSession= request.getSession();
+            HttpSession httpSession = request.getSession();
 
-            if(user == null){
-                httpSession.setAttribute("message","Invalid Details or User doesn't exist!!" );
+            if (user == null) {
+                httpSession.setAttribute("message", "Invalid Details or User doesn't exist!!");
                 response.sendRedirect("login.jsp");
-            }else{
+            } else {
                 //login approved
-                httpSession.setAttribute("current-user",user);
-                if (user.getUserType().equals("admin") || user.getUserType().equals("normal")){
+                httpSession.setAttribute("current-user", user);
+                if (user.getUserType().equals("admin") || user.getUserType().equals("normal")) {
                     // admin page
                     response.sendRedirect("index.jsp");
-                }
-                else {
+                } else {
                     out.println("User type could not be identified");
                 }
             }
 
         }
 
-        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 }

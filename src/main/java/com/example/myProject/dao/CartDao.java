@@ -1,8 +1,6 @@
 package com.example.myProject.dao;
 
 import com.example.myProject.entities.Cart;
-import com.example.myProject.entities.Category;
-import com.example.myProject.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class CartDao {
 
-    private SessionFactory factory;
+    private final SessionFactory factory;
 
     public CartDao(SessionFactory factory) {
         this.factory = factory;
@@ -48,7 +46,7 @@ public class CartDao {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.createQuery(" delete from Cart where cartPK.productId=: pi and cartPK.userId =: ui")
-                .setParameter("ui", uid).setParameter("pi",pid).executeUpdate();
+                .setParameter("ui", uid).setParameter("pi", pid).executeUpdate();
         tx.commit();
         session.close();
 

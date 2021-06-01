@@ -16,9 +16,9 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out =response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
 
-            HttpSession httpSession= request.getSession();
+            HttpSession httpSession = request.getSession();
             httpSession.removeAttribute("current-user");
             response.sendRedirect("index.jsp");
         }

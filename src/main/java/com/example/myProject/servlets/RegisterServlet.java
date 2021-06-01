@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        try(PrintWriter out =response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
 
             try {
                 String userName = request.getParameter("user_name");
@@ -33,25 +33,24 @@ public class RegisterServlet extends HttpServlet {
                 // Validations...
                 // creating User object
                 String userType = "";
-                if (userEmail.equals("muskansm@gmail.com")){
-                    userType="admin";
+                if (userEmail.equals("muskansm@gmail.com")) {
+                    userType = "admin";
+                } else {
+                    userType = "normal";
                 }
-                else{
-                    userType="normal";
-                }
-                User user = new User(userName,userEmail,userPassword,userPhone,
-                        "default.jpg",userAddress,userType);
+                User user = new User(userName, userEmail, userPassword, userPhone,
+                        "default.jpg", userAddress, userType);
 
-                UserDao userDao=new UserDao(FactoryProvider.getFactory());
-                int userId=userDao.saveUser(user);
+                UserDao userDao = new UserDao(FactoryProvider.getFactory());
+                int userId = userDao.saveUser(user);
 
-                HttpSession httpSession= request.getSession();
-                httpSession.setAttribute("message","Registration Successful !!" +
-                        "<br> Your User Id is "+userId );
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("message", "Registration Successful !!" +
+                        "<br> Your User Id is " + userId);
                 response.sendRedirect("login.jsp");
                 return;
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -60,6 +59,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 }

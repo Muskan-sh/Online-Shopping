@@ -1,8 +1,6 @@
 package com.example.myProject.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Product {
@@ -122,8 +120,8 @@ public class Product {
     }
 
     // func to calculate selling price
-    public int getSellingPrice(){
-        int disc= this.getpPrice()-(int)((this.getpDiscount()/100.0)*this.getpPrice());
+    public int getSellingPrice() {
+        int disc = this.getpPrice() - (int) ((this.getpDiscount() / 100.0) * this.getpPrice());
         return disc;
     }
 }
