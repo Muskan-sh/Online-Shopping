@@ -24,33 +24,34 @@
                     <div class="card-body ">
                         <form action="RegisterServlet" method="post">
                             <div class="form-group">
-                                <label for="name">User Name</label>
+                                <label for="name">Name<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
                                 <input name="user_name" type="text" class="form-control" id="name"
-                                       placeholder="Enter here" aria-describedby="emailHelp">
+                                       placeholder="Enter here" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
                                 <input name="user_email" type="email" class="form-control" id="email"
-                                       placeholder="Enter here" aria-describedby="emailHelp">
+                                       placeholder="Enter here" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input name="user_password" type="password" class="form-control" id="password"
-                                       placeholder="Enter here" aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
+                                <label for="phone">Phone Number<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
                                 <input name="user_phone" type="number" class="form-control" id="phone"
-                                       placeholder="Enter here" aria-describedby="emailHelp">
+                                       placeholder="Enter here" required>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <textarea name="user_address" id="address" style ="height: 130px" class="form-control" placeholder="Enter here"></textarea>
+                                <label for="password">Set Password<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
+                                <input name="user_password" type="password" class="form-control" id="password"
+                                       placeholder="Enter here" required>
                             </div>
+
+<%--                            <div class="form-group">--%>
+<%--                                <label for="address">Address</label>--%>
+<%--                                <textarea name="user_address" id="address" style ="height: 130px" class="form-control" placeholder="Enter here"></textarea>--%>
+<%--                            </div>--%>
                             <div class="container text-center">
                                 <button type="submit" class="btn btn-primary mx-3">Register</button>
                                 <button type="reset" class="btn btn-primary">Reset</button>
-                                <p class="mt-2">Already have an account?<br>
+                                <p class="mt-2">Already a member?<br>
                                     <a href="login.jsp"> Login here!</a> </p>
                             </div>
 

@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
                 String userEmail = request.getParameter("user_email");
                 String userPassword = request.getParameter("user_password");
                 String userPhone = request.getParameter("user_phone");
-                String userAddress = request.getParameter("user_address");
+//                String userAddress = request.getParameter("user_address");
 
                 // Validations...
                 // creating User object
@@ -39,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
                     userType = "normal";
                 }
                 User user = new User(userName, userEmail, userPassword, userPhone,
-                        "default.jpg", userAddress, userType);
+                        "default.jpg", "", userType);
 
                 UserDao userDao = new UserDao(FactoryProvider.getFactory());
                 int userId = userDao.saveUser(user);

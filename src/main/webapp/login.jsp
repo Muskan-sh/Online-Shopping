@@ -24,13 +24,13 @@
                         <%@include file="components/message.jsp"%>
                         <form action="LoginServlet" method="post">
                             <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input name="user_email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                                <label for="email">Email</label>
+                                <input name="user_email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input name="user_password" type="password" class="form-control" id="password">
+                                <input name="user_password" type="password" class="form-control" id="password" required>
                             </div>
                             <div class="container text-center">
                                 <button type="submit" class="btn btn-primary  mx-3">Submit</button>

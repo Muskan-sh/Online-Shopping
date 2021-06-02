@@ -43,8 +43,8 @@
     <%
     } else {
     %>
-    <h1 class="mt-4 text-center">Your Cart</h1>
-    <table class="table table-hover mt-4 text-center ">
+    <h1 class="my-4 text-center">Your Cart</h1>
+    <table class="table table-hover  text-center ">
         <thead class="thead-dark ">
         <tr>
             <th scope="col">Product Image</th>
@@ -111,10 +111,13 @@
         %>
         </tbody>
     </table>
-    <div class="text-center mt-5">
-        <form action="" method="post">
-            <button class="btn btn-outline-primary">Checkout</button>
-        </form>
+    <div class="row">
+        <div class="col-md-4 offset-md-4" >
+            <a class="btn btn-outline-primary " style="float: left;" href="index.jsp" role="button">Add More Items</a>
+            <form action="" method="post" style="float: right;">
+                <button class="btn btn-outline-primary">Checkout</button>
+            </form>
+        </div>
     </div>
     <%
         }
@@ -130,21 +133,3 @@
 
 </body>
 </html>
-
-<%--<div class="row mt-2">&ndash;%&gt;--%>
-<%--                    <div class="col-md-6 offset-md-3">--%>
-<%--                        <div class="card">--%>
-<%--                            <p class="bg-dark text-white "><%=p.getpName()%></p>--%>
-<%--                            <div class="card-body">--%>
-<%--                                    <div class="container">--%>
-<%--                                        <img style="max-height: 110px; max-width: 95%; width: auto; " class="img-fluid"--%>
-<%--                                             src="product_images/<%=p.getpPhoto() %>"--%>
-<%--                                             alt="Category_icon">--%>
-<%--                                    </div>--%>
-<%--                                &nbsp;--%>
-
-<%--                            </div>--%>
-
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
