@@ -7,19 +7,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous">
-<!-- Font Awesome css -->
-<%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"--%>
-<%--      integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni"--%>
-<%--      crossorigin="anonymous">--%>
-<%--<link rel="stylesheet" href="css/style.css">--%>
+
+<%--Add website icon--%>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
 <style>
     body{
-        background: aliceblue;
+        /*background: #ffcb9a;*/
+        background: #ffe0b2;
     }
-
 </style>
-
-<%--    Java script--%>
+<%--    Bootstrap Java script--%>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -27,6 +25,5 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 
-<script src="js/script.js"></script>
-
+<!-- Font Awesome css -->
 <script src="https://kit.fontawesome.com/06e0e1fa69.js" crossorigin="anonymous"></script>

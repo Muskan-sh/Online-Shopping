@@ -32,12 +32,19 @@
         /*    background: #CFD8DC;*/
         /*}*/
         .card {
-            background: pink !important;
-            border: 1px solid crimson !important;
+            background: #f5f5f5 !important;
+            border: 1px solid #116466 !important;
         }
         .card:hover{
-            background: lightgrey !important;
+            background: #d1e8e2 !important;
             cursor: pointer !important;
+        }
+        .custom-text{
+            color: #116466;
+        }
+        .custom-head{
+            background:#116466;
+            color: #d1e8e2;
         }
     </style>
 
@@ -56,10 +63,10 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="container">
-                            <img style="max-width: 110px" class="img-fluid" src="img/customer.png" alt="Users_icon">
+                            <img style="max-height: 70px; max-width: 75%; width: auto; " class="img-fluid" src="img/customer.png" alt="Users_icon">
                         </div>
-                        <h1><%= new UserDao(FactoryProvider.getFactory()).getTotalUsers()%></h1>
-                        <h1 class="text-uppercase text-muted">Users</h1>
+                        <h2><%= new UserDao(FactoryProvider.getFactory()).getTotalUsers()%></h2>
+                        <h2 class="text-uppercase custom-text">Users</h2>
                     </div>
                 </div>
             </div>
@@ -68,10 +75,10 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="container">
-                            <img style="max-width: 110px" class="img-fluid" src="img/categories.png" alt="Category_icon">
+                            <img style="max-height: 70px; max-width: 75%; width: auto; " class="img-fluid" src="img/categories.png" alt="Category_icon">
                         </div>
-                        <h1><%= new CategoryDao(FactoryProvider.getFactory()).getTotalCategories()%></h1>
-                        <h1 class="text-uppercase text-muted">Categories</h1>
+                        <h2><%= new CategoryDao(FactoryProvider.getFactory()).getTotalCategories()%></h2>
+                        <h2 class="text-uppercase custom-text">Categories</h2>
                     </div>
                 </div>
             </div>
@@ -80,10 +87,10 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="container">
-                            <img style="max-width: 110px" class="img-fluid" src="img/shopping-cart.png" alt="Product_icon">
+                            <img style="max-height: 70px; max-width: 75%; width: auto; " class="img-fluid" src="img/shopping-cart.png" alt="Product_icon">
                         </div>
-                        <h1><%= new ProductDao(FactoryProvider.getFactory()).getTotalProducts()%></h1>
-                        <h1 class="text-uppercase text-muted">Products</h1>
+                        <h2><%= new ProductDao(FactoryProvider.getFactory()).getTotalProducts()%></h2>
+                        <h2 class="text-uppercase custom-text">Products</h2>
                     </div>
                 </div>
             </div>
@@ -96,10 +103,10 @@
                 <div class="card" data-toggle="modal" data-target="#addCategoryModal">
                     <div class="card-body text-center">
                         <div class="container">
-                            <img style="max-width: 110px" class="img-fluid" src="img/list.png" alt="Category_icon">
+                            <img style="max-height: 70px; max-width: 75%; width: auto; " class="img-fluid" src="img/list%20(2).png" alt="Category_icon">
                         </div>
                         <p class="mt-3">Click here to add new category</p>
-                        <h1 class="text-uppercase text-muted">Add Category</h1>
+                        <h2 class="text-uppercase custom-text">Add Category</h2>
                     </div>
                 </div>
             </div>
@@ -108,10 +115,10 @@
                 <div class="card" data-toggle="modal" data-target="#addProductModal">
                     <div class="card-body text-center">
                         <div class="container">
-                            <img style="max-width: 110px" class="img-fluid" src="img/plus.png" alt="Product_icon">
+                            <img style="max-height: 70px; max-width: 75%; width: auto;" class="img-fluid" src="img/add.png" alt="Product_icon">
                         </div>
                         <p class="mt-3">Click here to add new product</p>
-                        <h1 class="text-uppercase text-muted">Add Product</h1>
+                        <h2 class="text-uppercase custom-text">Add Product</h2>
                     </div>
                 </div>
             </div>
@@ -125,13 +132,13 @@
     <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="modal1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-light">
+                <div class="modal-header custom-head">
                     <h4 class="modal-title" id="modal1">Fill category details</h4>
                     <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="background: #f5f5f5;">
                     <form action="ProductOperationServlet" method="post">
                         <input type="hidden" name="operation" value="addcategory">
                         <div class="form-group">
@@ -141,8 +148,8 @@
                             <textarea style="height: 200px" class="form-control" name="catDescription" placeholder="Enter category description"  required></textarea>
                         </div>
                         <div class="container text-center">
-                            <button class="btn btn-outline-success mx-4">Add Category</button>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-outline-success mx-4" style="background: #116466; color: #d1e8e2;">Add Category</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -159,13 +166,13 @@
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="modal2" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-light">
+                <div class="modal-header custom-head">
                     <h4 class="modal-title" id="modal2">Fill product details</h4>
                     <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="background: #f5f5f5;">
                     <form action="ProductOperationServlet" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="operation" value="addproduct"/>
                         <div class="form-group">
@@ -214,8 +221,8 @@
 <%--                            </div>--%>
 <%--                        </div>--%>
                         <div class="container text-center">
-                            <button class="btn btn-outline-success mx-4">Add Product</button>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-outline-success mx-4" style="background: #116466; color: #d1e8e2;">Add Product</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>

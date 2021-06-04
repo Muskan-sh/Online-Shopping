@@ -10,9 +10,10 @@ public class User {
     @Column(length = 10)
     private int userID;
     private String userName;
+    @Column(unique = true)
     private String userEmail;
     private String userPassword;
-    @Column(length = 12)
+    @Column(length = 10,unique = true)
     private String userPhone;
     private String userPic;
     @Column(length = 500)

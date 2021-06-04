@@ -1,66 +1,103 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Registration Page</title>
     <%@include file="components/common_css_js.jsp" %>
-    <style>
-        .card{
-            background: #CFD8DC;
-        }
-    </style>
+    <%--    <style>--%>
+    <%--        body{--%>
+    <%--            background: white !important;--%>
+    <%--        }--%>
+    <%--    </style>--%>
 </head>
 <body>
-    <%@include file="components/navbar.jsp"%>
-    <div class="container-fluid">
-        <div class="row mt-3">
-            <div class="col-md-4 offset-md-4">
-                <%@include file="components/message.jsp"%>
-                <div class="card">
-                    <div class="card-header bg-dark text-white text-center">
-                        <h3>Sign Up here!!</h3>
-                    </div>
-                    <div class="card-body ">
-                        <form action="RegisterServlet" method="post">
-                            <div class="form-group">
-                                <label for="name">Name<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
-                                <input name="user_name" type="text" class="form-control" id="name"
-                                       placeholder="Enter here" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
-                                <input name="user_email" type="email" class="form-control" id="email"
-                                       placeholder="Enter here" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
-                                <input name="user_phone" type="number" class="form-control" id="phone"
-                                       placeholder="Enter here" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Set Password<sup><i class="fas fa-asterisk ml-1" style="font-size: 9px;color: red"></i></sup></label>
-                                <input name="user_password" type="password" class="form-control" id="password"
-                                       placeholder="Enter here" required>
-                            </div>
+<div class="container text-center mt-3">
+    <!-- Navbar Brand -->
+    <a href="index.jsp" class="navbar-brand">
+        <img src="img/myLogo.png" class="image-fluid" alt="logo" width="180">
+    </a>
+</div>
+<%--    </nav>--%>
+<div class="container">
+    <div class="row py-3 align-items-center">
 
-<%--                            <div class="form-group">--%>
-<%--                                <label for="address">Address</label>--%>
-<%--                                <textarea name="user_address" id="address" style ="height: 130px" class="form-control" placeholder="Enter here"></textarea>--%>
-<%--                            </div>--%>
-                            <div class="container text-center">
-                                <button type="submit" class="btn btn-primary mx-3">Register</button>
-                                <button type="reset" class="btn btn-primary">Reset</button>
-                                <p class="mt-2">Already a member?<br>
-                                    <a href="login.jsp"> Login here!</a> </p>
-                            </div>
+        <div class="col-md-6 pr-lg-5 mb-5 mb-md-0 my-4">
+            <img src="img/register1.jpeg" style="height: 370px; width: 600px;" alt="img"
+                 class="img-fluid mb-3 d-none d-md-block">
+        </div>
 
-                        </form>
+        <!-- Registeration Form -->
+        <div class="col-md-6 col-lg-6 ">
+            <%@include file="components/message.jsp" %>
+            <div class="col-md-12 text-center ">
+                <h2 style="color: #116466; font-weight: bold">Create an Account</h2>
+            </div>
+            <form action="RegisterServlet" method="post">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <!-- Name -->
+                        <div class="input-group form-group my-4">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user" style="color: #116466;"></i>
+                            </span>
+                            </div>
+                            <input id="name" type="text" name="user_name" placeholder="Enter Name"
+                                   class="form-control bg-white border-left-0 border-md" required>
+                        </div>
+
+                        <!-- Email Address -->
+                        <div class="form-group input-group my-4">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-envelope" style="color: #116466;"></i>
+                            </span>
+                            </div>
+                            <input id="email" type="email" name="user_email" placeholder="Enter Email Address"
+                                   class="form-control bg-white border-left-0 border-md" required>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group input-group my-4">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-phone-square" style="color: #116466;"></i>
+                            </span>
+                            </div>
+                            <input id="phone" type="tel" name="user_phone" placeholder="Enter Phone Number"
+                                   class="form-control bg-white border-md border-left-0 pl-3" required>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group input-group my-4">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock" style="color: #116466;"></i>
+                            </span>
+                            </div>
+                            <input id="password" type="password" name="user_password" placeholder="Set Password"
+                                   class="form-control bg-white border-left-0 border-md" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block" style="background: #116466;color: #d1e8e2;">Sign
+                                Up
+                            </button>
+                        </div>
+
+                        <!-- Already Registered -->
+                        <div class="text-center">
+                            <p class="mt-2 font-weight-bold">Already have an account?
+                                <a href="login.jsp"> Login here!</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
 </body>
 </html>

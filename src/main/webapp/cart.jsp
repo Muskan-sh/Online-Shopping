@@ -12,7 +12,19 @@
 <head>
     <title>Your Cart</title>
     <%@include file="components/common_css_js.jsp" %>
-
+    <style>
+        table{
+            /*border-collapse: collapse;*/
+            border: solid 1px #116466 !important;
+        }
+        /*tr{*/
+        /*    border: solid 1px #116466;*/
+        /*}*/
+        .custom-head{
+            background:#116466;
+            color: #d1e8e2;
+        }
+    </style>
 </head>
 <body>
 <%@include file="components/navbar.jsp" %>
@@ -36,16 +48,16 @@
             httpSession.setAttribute("cart_List", items);
             if (items.size() == 0) {
     %>
-    <h1 class="text-dark text-center mt-5">Cart is empty!!</h1>
+    <h2 class="my-4 text-center" style=" font-weight: bold">Cart is empty!!</h2>
     <div class="text-center">
-        <a class="btn btn-outline-primary mt-5" href="index.jsp" role="button">Add items to Cart</a>
+        <a class="btn mt-5" style="background: #116466; color: #d1e8e2;" href="index.jsp" role="button">Add items to Cart</a>
     </div>
     <%
     } else {
     %>
-    <h1 class="my-4 text-center">Your Cart</h1>
+    <h2 class="my-4 text-center" style=" font-weight: bold">Your Cart</h2>
     <table class="table table-hover  text-center ">
-        <thead class="thead-dark ">
+        <thead class="custom-head">
         <tr>
             <th scope="col">Product Image</th>
             <th scope="col">Product Name</th>
@@ -55,7 +67,7 @@
             <th scope="col">Action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="background: #f5f5f5;">
         <%
             int i = -1;
             for (Cart item : items) {
@@ -102,7 +114,7 @@
                     <input type="hidden" name="object_name" value="<%=p.getpID()%>">
                     <input type="hidden" name="cart_item" value="<%=i%>">
 
-                    <button class="btn btn-outline-danger">Remove</button>
+                    <button class="btn btn-danger">Remove</button>
                 </form>
             </td>
         </tr>
@@ -111,11 +123,11 @@
         %>
         </tbody>
     </table>
-    <div class="row">
+    <div class="row my-4">
         <div class="col-md-4 offset-md-4" >
-            <a class="btn btn-outline-primary " style="float: left;" href="index.jsp" role="button">Add More Items</a>
+            <a class="btn " style="background: #116466; color: #d1e8e2;" href="index.jsp" role="button">Add More Items</a>
             <form action="" method="post" style="float: right;">
-                <button class="btn btn-outline-primary">Checkout</button>
+                <button class="btn" style="background: #116466; color: #d1e8e2;">Checkout</button>
             </form>
         </div>
     </div>
