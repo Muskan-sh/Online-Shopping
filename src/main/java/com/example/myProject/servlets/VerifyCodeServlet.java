@@ -19,7 +19,8 @@ public class VerifyCodeServlet extends HttpServlet {
             String otp = request.getParameter("otp");
 
             if(otp.equals(authcode)){
-                response.sendRedirect("RegisterServlet.java");
+
+                response.sendRedirect("RegisterServlet");
             }
             else{
                 httpSession.setAttribute("message", "Incorrect verification code");
