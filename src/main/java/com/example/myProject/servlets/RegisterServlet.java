@@ -3,6 +3,7 @@ package com.example.myProject.servlets;
 import com.example.myProject.FactoryProvider;
 import com.example.myProject.dao.UserDao;
 import com.example.myProject.entities.User;
+import com.example.myProject.mail.SendEmail;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,31 +25,35 @@ public class RegisterServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             try {
-                String userName = request.getParameter("user_name");
-                String userEmail = request.getParameter("user_email");
-                String userPassword = request.getParameter("user_password");
-                String userPhone = request.getParameter("user_phone");
-//                String userAddress = request.getParameter("user_address");
 
-                // Validations...
+                HttpSession httpSession  = request.getSession();
+
+                String userName= (String) httpSession.getAttribute("name");
+                String userEmail= (String) httpSession.getAttribute("email");
+                String userPassword= (String) httpSession.getAttribute("password");
+                String userPhone= (String) httpSession.getAttribute("phone");
+
+
                 // creating User object
                 String userType = "";
-                if (userEmail.equals("muskansm@gmail.com")) {
+                if (userEmail.equals("shopherewebsite@gmail.com")) {
                     userType = "admin";
                 } else {
                     userType = "normal";
                 }
                 User user = new User(userName, userEmail, userPassword, userPhone,
-                        "default.jpg", "", userType);
+                        "user (1).png", "", userType);
 
                 UserDao userDao = new UserDao(FactoryProvider.getFactory());
                 int userId = userDao.saveUser(user);
 
-                HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("message", "Registration Successful !!" +
-                        "<br> Your User Id is " + userId);
+                httpSession.removeAttribute("name");
+                httpSession.removeAttribute("email");
+                httpSession.removeAttribute("password");
+                httpSession.removeAttribute("phone");
+
+                httpSession.setAttribute("message", "Registration Successful !!");
                 response.sendRedirect("login.jsp");
-                return;
 
             } catch (Exception e) {
                 e.printStackTrace();

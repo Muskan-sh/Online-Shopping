@@ -33,7 +33,7 @@
             <div class="col-md-12 text-center ">
                 <h2 style="color: #116466; font-weight: bold">Create an Account</h2>
             </div>
-            <form action="RegisterServlet" method="post">
+            <form action="SendEmailServlet" method="post">
                 <div class="row">
                     <div class="col-md-12 ">
                         <!-- Name -->
@@ -82,8 +82,7 @@
 
                         <!-- Submit Button -->
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block" style="background: #116466;color: #d1e8e2;">Sign
-                                Up
+                            <button type="submit" class="btn btn-block" style="background: #116466;color: #d1e8e2;">Continue
                             </button>
                         </div>
 

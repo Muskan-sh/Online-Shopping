@@ -45,6 +45,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!--    mail sending-->
         <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
         <dependency>
@@ -52,6 +53,20 @@
             <artifactId>javax.mail-api</artifactId>
             <version>1.6.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

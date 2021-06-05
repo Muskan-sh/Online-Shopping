@@ -90,7 +90,7 @@
                     }else{
                 %>
                     <li class="nav-item active">
-                        <a class="nav-link bg2 mx-3" href="normal.jsp">Hello, <%= user1.getUserName().substring(0,user1.getUserName().indexOf(" "))%> </a>
+                        <a class="nav-link bg2 mx-3" href="userProfile.jsp">Hello, <%= user1.getUserName().substring(0,user1.getUserName().indexOf(" "))%> </a>
                     </li>
 <%--                    <li class="nav-item active">--%>
 <%--                        <a class="nav-link" href="normal.jsp">Profile</a>--%>

@@ -79,14 +79,14 @@
                     for (Category c : clist) {
                         if (cId != 0 && c.getCategoryID() == cId) {
                 %>
-                <a href="index.jsp?category=<%= c.getCategoryID()%>" style="background: #d1e8e2;color: #116466;font-weight: bold;"
+                <a href="index.jsp?category=<%= c.getCategoryID()%>" style="background: #f5f5f5;color: #116466;font-weight: bold;"
                    class="list-group-item list-group-item-action active" >
                     <%= c.getCategoryTitle() %>
                 </a>
                 <%
                 } else {
                 %>
-                <a href="index.jsp?category=<%= c.getCategoryID()%>" style="background: #f5f5f5"
+                <a href="index.jsp?category=<%= c.getCategoryID()%>" style="background: #f5f5f5;"
                    class="list-group-item list-group-item-action ">
                     <%= c.getCategoryTitle() %>
                 </a>

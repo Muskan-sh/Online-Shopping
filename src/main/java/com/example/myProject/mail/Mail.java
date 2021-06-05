@@ -6,7 +6,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * <b>I don't know whether a single session can send multiple mails if it cannot instead of creating static blocks use constructor and instead of static function use methods</b>
+ * <b>I don't know whether a single session can send multiple mails if it cannot instead of creating static blocks use
+ * constructor and instead of static function use methods</b>
  */
 public class Mail {
     static Session session;
