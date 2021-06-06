@@ -6,13 +6,16 @@ import com.example.myProject.dao.UserDao;
 import com.example.myProject.entities.User;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-
+@MultipartConfig
 @WebServlet(name = "UpdateUserProfileServlet", value = "/UpdateUserProfileServlet")
 public class UpdateUserProfileServlet extends HttpServlet {
     @Override
@@ -20,13 +23,13 @@ public class UpdateUserProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String option= request.getParameter("option");
+            String option = request.getParameter("option");
             out.println(option);
 
-            HttpSession httpSession=request.getSession();
-            User user =(User) httpSession.getAttribute("current-user");
+            HttpSession httpSession = request.getSession();
+            User user = (User) httpSession.getAttribute("current-user");
 
-            UserDao userDao= new UserDao(FactoryProvider.getFactory());
+            UserDao userDao = new UserDao(FactoryProvider.getFactory());
 
             if ("Profile".equals(option)) {
                 String remove = request.getParameter("remove");
@@ -34,38 +37,37 @@ public class UpdateUserProfileServlet extends HttpServlet {
                 String gender = request.getParameter("gender");
 
                 try {
-//                    Part part = request.getPart("photo");
-//                    String photo = part.getSubmittedFileName();
-//                    String userPic = user.getUserPic();
+                    Part part = request.getPart("photo");
+                    String photo = part.getSubmittedFileName();
+                    String userPic = user.getUserPic();
 
 
                     if (name.isBlank()) {
                         httpSession.setAttribute("message", "Name can't be Blank");
                         response.sendRedirect("userProfile.jsp?option=" + option);
                     } else {
-//                        if (remove != null && !userPic.equals("profile-user.png")) {
-//                            user.setUserPic("profile-user.png");
-//                            File myObj = new File(userPic);
-//                            myObj.delete();
-//                        } else if (!photo.equals(userPic)) {
-//
-//                            if (!userPic.equals("profile-user.png")) {
-//                                File myObj = new File(userPic);
-//                                myObj.delete();
-//                            }
-//                            user.setUserPic(photo);
-//                            String path1 = "C:\\Users\\reach\\Desktop\\Online-Shopping\\src\\main\\webapp\\user_profile_images\\" + photo;
-////                            String path2 = "C:\\Users\\reach\\Desktop\\Online-Shopping\\target\\e_commerce_project-1.0-SNAPSHOT\\user_profile_images\\" +photo;
-//
-//                            try {
-//                                Helper.uploadPhoto(path1, part);
-////                                Helper.uploadPhoto(path2,part);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        } else
-                            if (!name.equals(user.getUserName())) {
+                        if (remove != null) {
+                            System.out.println("(Inside If)  remove :   " + remove + "   Userpic :   " + userPic);
+                            if (!userPic.equals("profile-user.png")) {
+                                Helper.deletePhoto("user_profile_images", userPic);
+                            }
+                            user.setUserPic("profile-user.png");
+                        } else if (!photo.equals(userPic)) {
+
+                            System.out.println("(Inside else If)  remove :   " + remove + "   Userpic :   " + userPic);
+
+                            if (!userPic.equals("profile-user.png")) {
+                                Helper.deletePhoto("user_profile_images", userPic);
+                            }
+
+                            try {
+                                Helper.uploadPhoto("user_profile_images", photo, part);
+                                user.setUserPic(photo);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else if (!name.equals(user.getUserName())) {
                             user.setUserName(name);
                         } else if (gender != null && !gender.equals(user.getGender())) {
                             user.setGender(gender);
@@ -77,7 +79,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
                         httpSession.setAttribute("message", "Changes Saved Successfully");
                         response.sendRedirect("userProfile.jsp?option=" + option);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -90,7 +92,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
                 String new_pwd = request.getParameter("new_pwd");
                 String new_pwd_2 = request.getParameter("new_pwd_2");
 
-                if (pwd.isBlank() || new_pwd.isBlank() || new_pwd_2.isBlank() || pwd.isEmpty() || new_pwd.isEmpty() || new_pwd_2.isEmpty()) {
+                if (pwd.isBlank() || new_pwd.isBlank() || new_pwd_2.isBlank()) {
                     httpSession.setAttribute("message", "No changes made");
                     response.sendRedirect("userProfile.jsp?option=" + option);
                 } else {
@@ -114,9 +116,8 @@ public class UpdateUserProfileServlet extends HttpServlet {
             }
 
 
-
         } catch (Exception e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

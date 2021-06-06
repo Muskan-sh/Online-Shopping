@@ -59,16 +59,18 @@
                                     if (option.equals(options[0])) {
                                 %>
 
-                                <form class="mx-4" action="UpdateUserProfileServlet" method="post">
-                                    <input type="hidden" name="option" value="<%=option%>">
+                                <form class="mx-4" action="UpdateUserProfileServlet" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="option" value="<%=option%>" />
                                     <div class="form-group">
 
                                         <img src="user_profile_images/<%=user1.getUserPic()%>" alt="User image" class="mx-2 my-2 ml-2"
-                                             style="width: 120px;height: 120px;">
+                                             style="max-width: 120px;max-height: 120px;width: auto;">
                                         <label class="btn btn-outline-primary ml-2" for="photo">Upload new photo</label>&nbsp;
+<%--                                        <input type="file" id="photo" name="photo" >--%>
                                         <input type="file" id="photo" name="photo" style="position: absolute;visibility: hidden;opacity: 0;">
 
                                         <label class="btn btn-outline-danger" for="remove">Remove Photo</label>
+<%--                                        <input type="checkbox"--%>
                                         <input type="checkbox" style="position: absolute;visibility: hidden;opacity: 0;"
                                                name="remove" id="remove" value="remove">
                                         <br><small>Changes will be shown after they are saved.</small>
@@ -158,18 +160,41 @@
                                 <form class="mx-4" action="UpdateUserProfileServlet" method="post">
                                     <input type="hidden" name="option" value="<%=option%>">
 
-                                    <div class="form-group">
-                                        <label class="form-label">Current Password</label>
-                                        <input type="text" class="form-control" name="pwd" required>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label class="form-label">Current Password</label>--%>
+<%--                                        <input type="password" class="form-control" name="pwd" required>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label class="form-label">New Password</label>--%>
+<%--                                        <input type="password" class="form-control" name="new_pwd" required>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-group">--%>
+<%--                                        <label class="form-label">Repeat New Password</label>--%>
+<%--                                        <input type="text" class="form-control" name="new_pwd_2" required>--%>
+<%--                                    </div>--%>
+
+                                    <label class="form-label">Current Password</label>
+                                    <div class="input-group form-group">
+                                        <input type="password" class="form-control" id="pwd" name="pwd" required>
+                                        <div class="input-group-append">
+                                            <input type="button" onclick="p1()" value="view" >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label">New Password</label>
-                                        <input type="text" class="form-control" name="new_pwd" required>
+                                    <label class="form-label">New Password</label>
+                                    <div class="input-group form-group">
+                                        <input type="password" class="form-control" id="new_pwd" name="new_pwd" required>
+                                        <div class="input-group-append">
+                                            <input type="button" onclick="p2()" value="view" >
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Repeat New Password</label>
-                                        <input type="text" class="form-control" name="new_pwd_2" required>
+                                    <label class="form-label">Repeat New Password</label>
+                                    <div class="input-group form-group">
+                                        <input type="password" class="form-control" id="new_pwd_2" name="new_pwd_2" required>
+                                        <div class="input-group-append">
+                                            <input type="button" onclick="p3()" value="view" >
+                                        </div>
                                     </div>
+
                                     <div class="form-group mt-1 text-center">
                                         <button type="submit" class="btn btn-outline-primary">Save Changes
                                         </button>
@@ -178,6 +203,34 @@
                                 <div class="text-center">
                                     <a type="button" role="button" class="btn btn-outline-danger" href="userProfile.jsp?option=<%=option%>">Cancel</a>
                                 </div>
+
+                                <script>
+                                    function p1() {
+                                        var x = document.getElementById("pwd");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+                                    function p2() {
+                                        var x = document.getElementById("new_pwd");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+                                    function p3() {
+                                        var x = document.getElementById("new_pwd_2");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+
+                                </script>
 
                                 <%
                                 } else {

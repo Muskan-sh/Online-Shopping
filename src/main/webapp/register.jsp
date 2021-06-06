@@ -70,7 +70,17 @@
                         </div>
 
                         <!-- Password -->
-                        <div class="form-group input-group my-4">
+                        <%--                        <div class="form-group input-group my-4">--%>
+                        <%--                            <div class="input-group-prepend">--%>
+                        <%--                            <span class="input-group-text bg-white px-4 border-md border-right-0">--%>
+                        <%--                                <i class="fa fa-lock" style="color: #116466;"></i>--%>
+                        <%--                            </span>--%>
+                        <%--                            </div>--%>
+                        <%--                            <input id="password" type="password" name="user_password" placeholder="Set Password"--%>
+                        <%--                                   class="form-control bg-white border-left-0 border-md" required>--%>
+                        <%--                        </div>--%>
+
+                        <div class="input-group form-group my-4">
                             <div class="input-group-prepend">
                             <span class="input-group-text bg-white px-4 border-md border-right-0">
                                 <i class="fa fa-lock" style="color: #116466;"></i>
@@ -78,11 +88,25 @@
                             </div>
                             <input id="password" type="password" name="user_password" placeholder="Set Password"
                                    class="form-control bg-white border-left-0 border-md" required>
+                            <div class="input-group-append">
+                                <input type="button" onclick="p1()" value="view">
+                            </div>
                         </div>
+                        <script>
+                            function p1() {
+                                var x = document.getElementById("password");
+                                if (x.type === "password") {
+                                    x.type = "text";
+                                } else {
+                                    x.type = "password";
+                                }
+                            }
+                        </script>
 
                         <!-- Submit Button -->
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block" style="background: #116466;color: #d1e8e2;">Continue
+                            <button type="submit" class="btn btn-block" style="background: #116466;color: #d1e8e2;">
+                                Continue
                             </button>
                         </div>
 
