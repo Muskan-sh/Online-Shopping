@@ -196,7 +196,7 @@
                                     </div>
 
                                     <div class="form-group mt-1 text-center">
-                                        <button type="submit" class="btn btn-outline-primary">Save Changes
+                                        <button type="submit" class="btn btn-outline-primary">Continue
                                         </button>
                                     </div>
                                 </form>

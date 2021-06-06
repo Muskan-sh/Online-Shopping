@@ -33,7 +33,7 @@
             <div class="col-md-12 text-center ">
                 <h2 style="color: #116466; font-weight: bold">Create an Account</h2>
             </div>
-            <form action="SendEmailServlet" method="post">
+            <form action="SendVerificationEmailServlet" method="post">
                 <div class="row">
                     <div class="col-md-12 ">
                         <!-- Name -->

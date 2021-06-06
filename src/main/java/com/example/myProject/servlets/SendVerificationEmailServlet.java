@@ -8,8 +8,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "SendEmailServlet", value = "/SendEmailServlet")
-public class SendEmailServlet extends HttpServlet {
+@WebServlet(name = "SendVerificationEmailServlet", value = "/SendVerificationEmailServlet")
+public class SendVerificationEmailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,12 +38,25 @@ public class SendEmailServlet extends HttpServlet {
                     String otp = sm.getOTP();
 
                     //call the send email method
-                    boolean test = sm.sendEmail(name, email, otp);
+
+                    String subject= "Verify your Email on ShopHere";
+                    String msgContent= "<body style=\"background: lightgrey; \">" +
+                            "<div class=\"container\" style=\"background: #f5f5f5; \">" +
+                            "<center><img src=\"cid:image\" alt=\"logo-image\" ></center>" +
+                            "<div style=\"text-align: center;\"><h1>Welcome " + name.substring(0, name.indexOf(" ")) + "!</h1>" +
+                            "<p style=\"font-size:15px; font-weight:500;\">Thanks for choosing ShopHere.</p>" +
+                            "To complete your sign up, please verify your email by entering the given <span style=\"background: yellow;\">OTP</span>." +
+                            "<br>Please do not share OTP with anyone.<br>" +
+                            "<span style=\"font-weight: bold; font-size: 20px;margin-bottom: 10px;\">" + otp +"</span>"+
+                            "</div></div>" +
+                            "</body>";
+                    boolean test = sm.sendEmail(name, email, otp,msgContent,subject);
 
                     //check if the email send successfully
 
                     if (test) {
                         httpSession.setAttribute("authentication-code", otp);
+                        httpSession.setAttribute("senderPage","register");
                         response.sendRedirect("verify.jsp");
                     } else {
                         httpSession.setAttribute("message", "Failed to send verification email");

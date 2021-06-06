@@ -48,7 +48,7 @@ public class SendEmail {
      * It don't uses multithreading currently you can use it for fast performance <br/>
      * <b> @return <i>true</i> when mail is sent successfully else returns false </b>
      */
-    public boolean sendEmail(String name,String email,String otp) {
+    public boolean sendEmail(String name,String email,String otp,String msgContent,String subject) {
 
         // Create a default MimeMessage object.
         MimeMessage message = new MimeMessage(session);
@@ -63,21 +63,11 @@ public class SendEmail {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
             // Set Subject: subject of the email
-            message.setSubject("Verify your Email on ShopHere");
+            message.setSubject(subject);
 
             // first part (the html)
             BodyPart messageBodyPart = new MimeBodyPart();
-            String htmlText = "<body style=\"background: lightgrey; \">" +
-                    "<div class=\"container\" style=\"background: #f5f5f5; \">" +
-                    "<center><img src=\"cid:image\" alt=\"logo-image\" ></center>" +
-                    "<div style=\"text-align: center;\"><h1>Welcome " + name.substring(0, name.indexOf(" ")) + "!</h1>" +
-                    "<p style=\"font-size:15px; font-weight:500;\">Thanks for choosing ShopHere.</p>" +
-                    "To complete your sign up, please verify your email by entering the given <span style=\"background: yellow;\">OTP</span>." +
-                    "<br>It will be valid for 10 minutes. Please do not share <span style=\"background: yellow;\">OTP</span> with anyone." +
-                    "<div style=\" border:lightblue ; font-weight: bold; font-size: 20px;\">" + otp +"</div>"+
-                    "</div></div>" +
-                    "</body>";
-            messageBodyPart.setContent(htmlText, "text/html");
+            messageBodyPart.setContent(msgContent, "text/html");
 
             // add it
             multipart.addBodyPart(messageBodyPart);
@@ -85,7 +75,7 @@ public class SendEmail {
             // second part (the image)
             messageBodyPart = new MimeBodyPart();
 
-            DataSource fds = new FileDataSource("C:\\Users\\reach\\Desktop\\modal\\src\\main\\java\\com\\example\\modal\\myLogo-removebg-preview.png");
+            DataSource fds = new FileDataSource("C:\\Users\\reach\\Desktop\\Online-Shopping\\src\\main\\webapp\\img\\myLogo.png");
 
             messageBodyPart.setDataHandler(new DataHandler(fds));
             messageBodyPart.setHeader("Content-ID", "<image>");

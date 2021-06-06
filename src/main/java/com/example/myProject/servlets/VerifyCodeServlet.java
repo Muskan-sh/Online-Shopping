@@ -15,12 +15,16 @@ public class VerifyCodeServlet extends HttpServlet {
 
             HttpSession httpSession = request.getSession();
             String authcode= (String) httpSession.getAttribute("authentication-code");
+            String senderPage= (String) httpSession.getAttribute("senderPage");
 
             String otp = request.getParameter("otp");
 
             if(otp.equals(authcode)){
                 httpSession.removeAttribute("authentication-code");
-                response.sendRedirect("RegisterServlet");
+                if(senderPage.equals("register"))
+                    response.sendRedirect("RegisterServlet");
+                else
+                    response.sendRedirect("ChangePasswordServlet");
             }
             else{
                 httpSession.setAttribute("message", "Incorrect verification code");
