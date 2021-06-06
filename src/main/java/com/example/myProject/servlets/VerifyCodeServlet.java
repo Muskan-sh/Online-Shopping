@@ -19,7 +19,7 @@ public class VerifyCodeServlet extends HttpServlet {
             String otp = request.getParameter("otp");
 
             if(otp.equals(authcode)){
-
+                httpSession.removeAttribute("authentication-code");
                 response.sendRedirect("RegisterServlet");
             }
             else{

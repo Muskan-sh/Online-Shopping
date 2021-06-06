@@ -23,26 +23,32 @@ public class SendEmailServlet extends HttpServlet {
 
                 HttpSession httpSession = request.getSession();
 
-                httpSession.setAttribute("name",name);
-                httpSession.setAttribute("email",email);
-                httpSession.setAttribute("password",password);
-                httpSession.setAttribute("phone",phone);
-
-                //get the 6-digit code
-                SendEmail sm = new SendEmail();
-                String otp = sm.getOTP();
-
-                //call the send email method
-                boolean test = sm.sendEmail(name, email, otp);
-
-                //check if the email send successfully
-
-                if (test) {
-                    httpSession.setAttribute("authentication-code", otp);
-                    response.sendRedirect("verify.jsp");
-                } else {
-                    httpSession.setAttribute("message", "Failed to send verification email");
+                if(name.isBlank() || email.isBlank() || password.isBlank() || phone.isBlank()){
+                    httpSession.setAttribute("message","Field(s) can't be Empty");
                     response.sendRedirect("register.jsp");
+                }
+                else{
+                    httpSession.setAttribute("name",name);
+                    httpSession.setAttribute("email",email);
+                    httpSession.setAttribute("password",password);
+                    httpSession.setAttribute("phone",phone);
+
+                    //get the 6-digit code
+                    SendEmail sm = new SendEmail();
+                    String otp = sm.getOTP();
+
+                    //call the send email method
+                    boolean test = sm.sendEmail(name, email, otp);
+
+                    //check if the email send successfully
+
+                    if (test) {
+                        httpSession.setAttribute("authentication-code", otp);
+                        response.sendRedirect("verify.jsp");
+                    } else {
+                        httpSession.setAttribute("message", "Failed to send verification email");
+                        response.sendRedirect("register.jsp");
+                    }
                 }
 
             }catch (Exception e){

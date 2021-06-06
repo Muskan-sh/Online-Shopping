@@ -1,6 +1,7 @@
 package com.example.myProject.servlets;
 
 import com.example.myProject.FactoryProvider;
+import com.example.myProject.Helper;
 import com.example.myProject.dao.CategoryDao;
 import com.example.myProject.dao.ProductDao;
 import com.example.myProject.entities.Category;
@@ -82,7 +83,7 @@ public class ProductOperationServlet extends HttpServlet {
                 ProductDao productDao = new ProductDao(FactoryProvider.getFactory());
                 int pId = productDao.saveProduct(product);
 
-//                productDao.updateProductPhoto(product, category.getCategoryTitle().replace(' ','-') + "-" + pId +photo.substring(photo.indexOf('.')));
+                productDao.updateProductPhoto(product, category.getCategoryTitle().replace(' ','-') + "-" + pId +photo.substring(photo.indexOf('.')));
 
                 //uploading pic
                 String path1 = "C:\\Users\\reach\\Desktop\\Online-Shopping\\target\\e_commerce_project-1.0-SNAPSHOT\\product_images\\" + product.getpPhoto();
@@ -90,46 +91,22 @@ public class ProductOperationServlet extends HttpServlet {
 //                System.out.println(path1);
 
                 try {
-
-                    FileOutputStream fos = new FileOutputStream(path1);
-                    InputStream is = part.getInputStream();
-
-                    // reading data
-                    byte[] data = new byte[is.available()];
-                    is.read(data);
-
-                    // writing data
-                    fos.write(data);
-                    fos.close();
+                    Helper.uploadPhoto(path1,part);
+                    Helper.uploadPhoto(path2,part);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                try {
-
-                    FileOutputStream fos = new FileOutputStream(path2);
-                    InputStream is = part.getInputStream();
-
-                    // reading data
-                    byte[] data = new byte[is.available()];
-                    is.read(data);
-
-                    // writing data
-                    fos.write(data);
-                    fos.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
 
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("message", "Product added successfully!!<br>" +
                         "Product Id is : " + pId);
                 response.sendRedirect("admin.jsp");
-                return;
 
             }
 
 
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

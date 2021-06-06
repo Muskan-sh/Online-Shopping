@@ -24,6 +24,14 @@ public class UserDao {
         return userId;
     }
 
+    public void updateUser(User user) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.update(user);
+        tx.commit();
+        session.close();
+    }
+
     public User getUserByEmailAndPassword(String email, String password) {
 
         User user = null;

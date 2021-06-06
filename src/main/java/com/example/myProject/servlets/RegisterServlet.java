@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
                     userType = "normal";
                 }
                 User user = new User(userName, userEmail, userPassword, userPhone,
-                        "user (1).png", "", userType);
+                        "profile-user.png", userType);
 
                 UserDao userDao = new UserDao(FactoryProvider.getFactory());
                 int userId = userDao.saveUser(user);

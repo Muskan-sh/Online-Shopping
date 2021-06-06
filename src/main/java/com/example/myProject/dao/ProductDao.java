@@ -66,4 +66,5 @@ public class ProductDao {
     public int getTotalProducts() {
         return getAllProducts().size();
     }
+
 }

@@ -18,6 +18,7 @@ public class User {
     private String userPic;
     @Column(length = 500)
     private String userAddress;
+    private String gender;
 
     private String userType;
 
@@ -30,7 +31,7 @@ public class User {
 //    private List<Product> products = new ArrayList<>();
 
     public User(int userID, String userName, String userEmail, String userPassword,
-                String userPhone, String userPic, String userAddress, String userType) {
+                String userPhone, String userPic, String userAddress, String userType,String gender) {
         this.userID = userID;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -39,17 +40,17 @@ public class User {
         this.userPic = userPic;
         this.userAddress = userAddress;
         this.userType = userType;
+        this.gender = gender;
 
     }
 
     public User(String userName, String userEmail, String userPassword,
-                String userPhone, String userPic, String userAddress, String userType) {
+                String userPhone, String userPic, String userType) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userPhone = userPhone;
         this.userPic = userPic;
-        this.userAddress = userAddress;
         this.userType = userType;
     }
 
@@ -120,7 +121,15 @@ public class User {
         this.userType = userType;
     }
 
-//    public List<Product> getProducts() {
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    //    public List<Product> getProducts() {
 //        return products;
 //    }
 //

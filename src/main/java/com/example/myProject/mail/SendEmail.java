@@ -74,7 +74,7 @@ public class SendEmail {
                     "<p style=\"font-size:15px; font-weight:500;\">Thanks for choosing ShopHere.</p>" +
                     "To complete your sign up, please verify your email by entering the given <span style=\"background: yellow;\">OTP</span>." +
                     "<br>It will be valid for 10 minutes. Please do not share <span style=\"background: yellow;\">OTP</span> with anyone." +
-                    "<br><br><span style=\" background: lightblue; font-weight: bold; font-size: 20px;\">" + otp +"</span>"+
+                    "<div style=\" border:lightblue ; font-weight: bold; font-size: 20px;\">" + otp +"</div>"+
                     "</div></div>" +
                     "</body>";
             messageBodyPart.setContent(htmlText, "text/html");

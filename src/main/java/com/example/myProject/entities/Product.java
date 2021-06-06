@@ -124,4 +124,5 @@ public class Product {
         int disc = this.getpPrice() - (int) ((this.getpDiscount() / 100.0) * this.getpPrice());
         return disc;
     }
+
 }
