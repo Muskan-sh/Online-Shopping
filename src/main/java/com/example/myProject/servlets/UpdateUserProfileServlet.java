@@ -43,6 +43,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
                     String photo = part.getSubmittedFileName();
 //                    System.out.println("\""+photo+"\"");
                     String userPic = user.getUserPic();
+                    boolean changes = false;
 
 
                     if (name.isBlank()) {
@@ -53,35 +54,41 @@ public class UpdateUserProfileServlet extends HttpServlet {
                             System.out.println("(Inside If)  remove :   " + remove + "   Userpic :   " + userPic);
                             Helper.deletePhoto("user_profile_images", userPic);
                             user.setUserPic("profile-user.png");
+                            changes = true;
                         }
-                        else if (remove==null && !photo.isEmpty() && !photo.equals(userPic)) {
+                        if (remove == null && !photo.isEmpty() && !photo.equals(userPic)) {
 
                             System.out.println("(Inside else If)  remove :   " + remove + "   Userpic :   " + userPic);
 
                             if (!userPic.equals("profile-user.png")) {
                                 Helper.deletePhoto("user_profile_images", userPic);
                             }
-
                             try {
                                 Helper.uploadPhoto("user_profile_images", photo, part);
                                 user.setUserPic(photo);
+                                changes = true;
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-                        } else if (!name.equals(user.getUserName())) {
+                        }
+                        if (!name.equals(user.getUserName())) {
                             user.setUserName(name);
-                        } else if (gender != null && !gender.equals(user.getGender())) {
+                            changes = true;
+                        }
+                        if (gender != null && !gender.equals(user.getGender())) {
                             user.setGender(gender);
-                        } else {
+                            changes = true;
+                        }
+                        if (!changes) {
 //                            System.out.println("no change");
                             httpSession.setAttribute("message", "No changes made!!");
                             response.sendRedirect("userProfile.jsp?option=" + option);
                             return;
+                        } else {
+                            userDao.updateUser(user);
+                            httpSession.setAttribute("message", "Changes Saved Successfully");
+                            response.sendRedirect("userProfile.jsp?option=" + option);
                         }
-                        userDao.updateUser(user);
-                        httpSession.setAttribute("message", "Changes Saved Successfully");
-                        response.sendRedirect("userProfile.jsp?option=" + option);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -110,27 +117,27 @@ public class UpdateUserProfileServlet extends HttpServlet {
                             SendEmail sm = new SendEmail();
                             String otp = sm.getOTP();
 
-                            String subject="Request for Password Change";
-                            String msgContent= "<body style=\"background: lightgrey; \">" +
+                            String subject = "Request for Password Change";
+                            String msgContent = "<body style=\"background: lightgrey; \">" +
                                     "<div class=\"container\" style=\"background: #f5f5f5; \">" +
                                     "<center><img src=\"cid:image\" alt=\"logo-image\" ></center>" +
-                                    "<div style=\"text-align: center;\"><h1>ALERT" +"!</h1>" +
+                                    "<div style=\"text-align: center;\"><h1>ALERT" + "!</h1>" +
                                     "Request to change password is made for your ShopHere account.<br>" +
                                     "Enter the given <span style=\"background: yellow;\">OTP</span> to process password change." +
                                     "<br>Please do not share OTP with anyone.<br>" +
-                                    "<span style=\"font-weight: bold; font-size: 20px;margin-bottom: 10px;\">" + otp +"</span>"+
+                                    "<span style=\"font-weight: bold; font-size: 20px;margin-bottom: 10px;\">" + otp + "</span>" +
                                     "</div></div>" +
                                     "</body>";
-                            boolean test = sm.sendEmail(user.getUserName(), user.getUserEmail(), otp,msgContent,subject);
+                            boolean test = sm.sendEmail(user.getUserName(), user.getUserEmail(), otp, msgContent, subject);
 
                             //check if the email send successfully
 
                             if (test) {
                                 httpSession.setAttribute("authentication-code", otp);
 
-                                httpSession.setAttribute("new_pwd",new_pwd);
-                                httpSession.setAttribute("option",option);
-                               response.sendRedirect("verify.jsp");
+                                httpSession.setAttribute("new_pwd", new_pwd);
+                                httpSession.setAttribute("option", option);
+                                response.sendRedirect("verify.jsp");
 
                             } else {
                                 httpSession.setAttribute("message", "Failed to send verification email");
