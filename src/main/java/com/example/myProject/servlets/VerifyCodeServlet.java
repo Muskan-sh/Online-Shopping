@@ -21,10 +21,14 @@ public class VerifyCodeServlet extends HttpServlet {
 
             if(otp.equals(authcode)){
                 httpSession.removeAttribute("authentication-code");
-                if(senderPage.equals("register"))
+                if(senderPage.equals("register")) {
+                    httpSession.removeAttribute("senderPage");
                     response.sendRedirect("RegisterServlet");
-                else
+                }
+                else{
+                    httpSession.removeAttribute("senderPage");
                     response.sendRedirect("ChangePasswordServlet");
+                }
             }
             else{
                 httpSession.setAttribute("message", "Incorrect verification code");

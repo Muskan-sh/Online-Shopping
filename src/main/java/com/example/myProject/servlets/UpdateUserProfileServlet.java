@@ -108,7 +108,10 @@ public class UpdateUserProfileServlet extends HttpServlet {
                     response.sendRedirect("userProfile.jsp?option=" + option);
                 } else {
                     if (pwd.equals(user.getUserPassword())) {
-                        if (!new_pwd.equals(new_pwd_2)) {
+                        if (!new_pwd.equals(pwd)) {
+                            httpSession.setAttribute("message", "New password must be different than the old password");
+                            response.sendRedirect("userProfile.jsp?option=" + option);
+                        }else if (!new_pwd.equals(new_pwd_2)) {
                             httpSession.setAttribute("message", "Enter new password correctly");
                             response.sendRedirect("userProfile.jsp?option=" + option);
                         } else {
@@ -134,6 +137,7 @@ public class UpdateUserProfileServlet extends HttpServlet {
 
                             if (test) {
                                 httpSession.setAttribute("authentication-code", otp);
+                                httpSession.setAttribute("senderPage","changePassword");
 
                                 httpSession.setAttribute("new_pwd", new_pwd);
                                 httpSession.setAttribute("option", option);
